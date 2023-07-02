@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>music</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        .example {
+            text-align: center;
+        }
+        button {
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px;
+        }
+        #songTitle {
+			color: white;
+			font-size: 24px;
+			top: 10px;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+    </style>
+</head>
+<body>
+    <div class="example">
+        <div id="songTitle"></div>
+        <p></p>
+        <audio id="player" controls></audio>
+        <p></p>
+        <div id="songTitle"></div>
+        <button id="prev">前の曲</button>
+        <button id="play">再生/一時停止</button>
+        <button id="next">次の曲</button>
+    </div>
+    <script>
+        const audioPlayer = document.getElementById("player");
+        const playButton = document.getElementById("play");
+        const prevButton = document.getElementById("prev");
+        const nextButton = document.getElementById("next");
+        const songs = [
+        "music/雨雫.mp3",
+        "music/song2.mp3",
+        "music/song3.mp3"
+        ];
+        let currentSongIndex = 0;
+
+        function playSong() {
+            audioPlayer.src = songs[currentSongIndex];
+            audioPlayer.load();
+            audioPlayer.play();
+            const songTitle = document.getElementById("songTitle");
+			songTitle.textContent = songs[currentsongIndex];
+            playButton.textContent = "一時停止";
+        }
+
+        function pauseSong() {
+            audioPlayer.pause();
+            playButton.textContent = "再生";
+        }
+
+        function nextSong() {
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            playSong();
+        }
+
+        function prevSong() {
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            playSong();
+        }
+
+        playButton.addEventListener("click", () => {
+        if (audioPlayer.paused) {
+            playSong();
+        } else {
+            pauseSong();
+        }
+        });
+
+        nextButton.addEventListener("click", nextSong);
+        prevButton.addEventListener("click", prevSong);
+    </script>
+</body>
+</html>
