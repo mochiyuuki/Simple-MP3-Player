@@ -3,51 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>music</title>
-    <style>
-        body {
-            background-color: black;
-        }
-        .example {
-            text-align: center;
-        }
-        button {
-            background-color: white;
-            color: black;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            padding: 10px;
-            margin: 10px;
-        }
-        #songTitle {
-			color: white;
-			font-size: 24px;
-			top: 10px;
-			left: 50%;
-			transform: translateX(-50%);
-		}
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <div id="navbar">
+            <ul>
+                <li><a href="../ホーム/index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+    <p class="title">Music player (Sample)</p>
     <div class="example">
-        <div id="songTitle"></div>
+        <img id="albumArt" src="music/1/image.jpg" alt="Album Art">
+        <div id="songTitle">雨雫</div>
         <p></p>
-        <audio id="player" controls></audio>
+        <audio id="player" controls muted></audio>
         <p></p>
         <div id="songTitle"></div>
-        <button id="prev">前の曲</button>
-        <button id="play">再生/一時停止</button>
-        <button id="next">次の曲</button>
+        <button id="prev">Previous song</button>
+        <button id="skipBackward">Go back 10 seconds</button>
+        <button id="play">Play/Pause</button>
+        <button id="skipForward">Go forward 10 seconds</button>
+        <button id="next">Next song</button>
     </div>
+    <p class="site-creator">Made by mochi</p>
     <script>
         const audioPlayer = document.getElementById("player");
         const playButton = document.getElementById("play");
         const prevButton = document.getElementById("prev");
         const nextButton = document.getElementById("next");
+        const skipBackwardButton = document.getElementById("skipBackward");
+        const skipForwardButton = document.getElementById("skipForward");
+        const albumArt = document.getElementById("albumArt");
         const songs = [
-        "music/雨雫.mp3",
-        "music/song2.mp3",
-        "music/song3.mp3"
+            "music/1/雨雫.mp3",
+            "music/2/song2.mp3",
+            "music/3/song3.mp3",
+            "music/4/song4.mp3",
+            "music/5/song5.mp3"
+        ];
+        const albumArtPath = [
+            "music/1/image.jpg",
+            "music/2/image.jpg",
+            "music/3/image.jpg",
+            "music/4/image.jpg",
+            "music/5/image.jpg"
         ];
         let currentSongIndex = 0;
 
@@ -56,13 +59,14 @@
             audioPlayer.load();
             audioPlayer.play();
             const songTitle = document.getElementById("songTitle");
-			songTitle.textContent = songs[currentsongIndex];
-            playButton.textContent = "一時停止";
+            songTitle.textContent = songs[currentSongIndex].split('/').pop().replace('.mp3', '');
+            playButton.textContent = "Pause";
+            albumArt.src = albumArtPath[currentSongIndex];
         }
 
         function pauseSong() {
             audioPlayer.pause();
-            playButton.textContent = "再生";
+            playButton.textContent = "Play";
         }
 
         function nextSong() {
@@ -75,16 +79,28 @@
             playSong();
         }
 
-        playButton.addEventListener("click", () => {
-        if (audioPlayer.paused) {
-            playSong();
-        } else {
-            pauseSong();
+        function skipBackward() {
+            audioPlayer.currentTime -= 10;
         }
+
+        function skipForward() {
+            audioPlayer.currentTime += 10;
+        }
+
+        playSong(); // 初期画面で1番目の曲を再生する
+
+        playButton.addEventListener("click", () => {
+            if (audioPlayer.paused) {
+                playSong();
+            } else {
+                pauseSong();
+            }
         });
 
         nextButton.addEventListener("click", nextSong);
         prevButton.addEventListener("click", prevSong);
+        skipBackwardButton.addEventListener("click", skipBackward);
+        skipForwardButton.addEventListener("click", skipForward);
     </script>
 </body>
 </html>

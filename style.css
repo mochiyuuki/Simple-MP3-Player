@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Sawarabi+Mincho');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
+body {
+    background-image: url(./wallpepar/wallpepar.jpg);
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    background-attachment:fixed;
+}
+#navbar {
+    color: black;
+    padding: 10px;
+}
+
+#navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+#navbar ul li a {
+    font-family: 'Sawarabi Mincho', sans-serif;
+    color: black;
+    text-decoration: none;
+}
+.title {
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Caveat', cursive;
+
+}
+.example {
+    text-align: center;
+}
+button {
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Sawarabi Mincho', sans-serif;
+    padding: 10px;
+    margin: 10px;
+}
+#albumArt{
+    width: 60%;
+    height: 300px;
+}
+#songTitle {
+    font-family: 'Sawarabi Mincho', sans-serif;
+    color: black;
+    font-size: 24px;
+    top: 10px;
+    left: 50%;
+    
+}
+.site-creator{
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Caveat', cursive;
+}
